@@ -46,7 +46,13 @@ module.exports = class Email {
       text: htmlToText.htmlToText(html),
     };
 
+    console.log('sending mail');
     await this.newTransport().sendMail(mailOptions);
+
+    console.log('email sent');
+    console.log('email sent');
+    console.log('email sent');
+    console.log('email sent');
   }
 
   async sendWelcome() {

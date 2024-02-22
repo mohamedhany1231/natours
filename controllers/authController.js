@@ -190,7 +190,8 @@ exports.updatePassword = asyncCatch(async (req, res, next) => {
   const currentUser = await User.findById(req.user.id).select('+password');
 
   // 2-check if posted password is correct
-
+  console.log(req.user);
+  console.log(req.body.currentPassword, currentUser.password);
   if (
     !req.body.currentPassword ||
     !(await currentUser.correctPassword(

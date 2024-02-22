@@ -12045,7 +12045,7 @@ var login = exports.login = /*#__PURE__*/function () {
           _context.next = 3;
           return (0, _axios.default)({
             method: 'POST',
-            url: '/api/v1/users/login',
+            url: 'http://127.0.0.1:3000/api/v1/users/login',
             data: {
               email: email,
               password: password
@@ -12085,7 +12085,7 @@ var logout = exports.logout = /*#__PURE__*/function () {
           _context2.next = 3;
           return (0, _axios.default)({
             method: 'GET',
-            url: '/api/v1/users/logout'
+            url: 'http://127.0.0.1:3000/api/v1/users/logout'
           });
         case 3:
           res = _context2.sent;
@@ -12129,7 +12129,7 @@ var updateSettings = exports.updateSettings = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          url = type === 'password' ? '/api/v1/users/updateMyPassword' : '/api/v1/users/updateMe';
+          url = type === 'password' ? 'http://127.0.0.1:3000/api/v1/users/updateMyPassword' : 'http://127.0.0.1:3000/api/v1/users/updateMe';
           _context.next = 4;
           return (0, _axios.default)({
             method: 'PATCH',
@@ -12178,28 +12178,34 @@ var bookTour = exports.bookTour = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          _context.next = 3;
-          return (0, _axios.default)("/api/v1/bookings/checkout-session/".concat(tourId));
-        case 3:
+          console.log('////////////////////////////////////////////////////////////////////////////////////');
+          _context.prev = 1;
+          _context.next = 4;
+          return (0, _axios.default)("http://127.0.0.1:3000/api/v1/bookings/checkout-session/".concat(tourId));
+        case 4:
           session = _context.sent;
-          _context.next = 6;
+          console.log(session);
+
+          // 2) Create checkout form + chanre credit card
+          _context.next = 8;
           return stripe.redirectToCheckout({
             sessionId: session.data.session.id
           });
-        case 6:
-          _context.next = 12;
-          break;
         case 8:
-          _context.prev = 8;
-          _context.t0 = _context["catch"](0);
+          _context.next = 14;
+          break;
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](1);
           console.log(_context.t0);
           (0, _alerts.showAlert)('error', _context.t0);
-        case 12:
+        case 14:
+          console.log('////////////////////////////////////////////////////////////////////////////////////');
+        case 15:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[1, 10]]);
   }));
   return function bookTour(_x) {
     return _ref.apply(this, arguments);
@@ -12372,8 +12378,7 @@ if (userDataForm) userDataForm.addEventListener('submit', function (e) {
   form.append('name', document.getElementById('name').value);
   form.append('email', document.getElementById('email').value);
   form.append('photo', document.getElementById('photo').files[0]);
-  // console.log(form);
-
+  console.log(form);
   (0, _updateSettings.updateSettings)(form, 'data');
 });
 if (userPasswordForm) userPasswordForm.addEventListener('submit', /*#__PURE__*/function () {
@@ -12438,7 +12443,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34787" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43055" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
