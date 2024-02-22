@@ -7,7 +7,7 @@ const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
-
+const cors = require('cors');
 const viewRouter = require('./routes/viewRoutes');
 const tourRouter = require('./routes/tourRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
@@ -21,6 +21,12 @@ app.enable('trust proxy');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+
+// implement cors
+app.use(cors());
+//  Access-control-allow-origin : *
+
+app.options('*', cors());
 
 // 1) MIDDLEWARE
 
