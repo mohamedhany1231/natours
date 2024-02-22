@@ -7,6 +7,7 @@ const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const viewRouter = require('./routes/viewRoutes');
 const tourRouter = require('./routes/tourRoutes');
@@ -65,6 +66,8 @@ app.use(
     ],
   }),
 );
+
+app.use(compression());
 
 // to server static file => if url doesn't match defined route , express will search the defined public folder for path that match the route
 app.use(express.static(`${__dirname}/public`));
